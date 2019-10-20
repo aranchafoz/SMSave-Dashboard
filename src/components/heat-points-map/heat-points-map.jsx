@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import MapGL, {Source, Layer, Popup} from 'react-map-gl';
 import {heatmapLayer} from './map-style';
 import {pointsLayer} from './map-style';
@@ -14,11 +14,16 @@ const HeatPointsMap = ({className, data}) => {
   const [viewport, setViewport] = useState({
     latitude: 0,
     longitude: 0,
-    zoom: 4,
+    zoom: 2,
     bearing: 0,
     pitch: 0
   });
   const [popupInfo, setPopupInfo] = useState(null);
+  const [alerts, setAlerts] = useState(data);
+
+  useEffect(() => {
+    setAlerts(data);
+  }, [data])
 
   const _renderPopup = () => {
     if (!popupInfo) return;
@@ -63,8 +68,8 @@ const HeatPointsMap = ({className, data}) => {
         mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}
         onClick={e => handleOnClickMap(e)}
       >
-        {data && (
-          <Source type="geojson" data={data}>
+        {(alerts && alerts.features) && (
+          <Source type="geojson" data={alerts}>
             <Layer {...heatmapLayer} />
             <Layer {...pointsLayer} />
           </Source>

@@ -6,8 +6,10 @@ const CountryChart = ({data}) => {
   const [alertsByCountry, setAlertsByCountry] = useState({});
 
   useEffect(() => {
-    const newData = getAlertsByCountries(data.features);
-    setAlertsByCountry(newData);
+    if (data.features) {
+      const newData = getAlertsByCountries(data.features);
+      setAlertsByCountry(newData);
+    }
   }, [data.features])
 
 

@@ -6,8 +6,10 @@ const SourceChart = ({data}) => {
   const [alertsBySource, setAlertsBySource] = useState({});
 
   useEffect(() => {
-    const newData = getAlertsBySource(data.features);
-    setAlertsBySource(newData);
+    if (data.features) {
+      const newData = getAlertsBySource(data.features);
+      setAlertsBySource(newData);
+    }
   }, [data.features])
 
 
