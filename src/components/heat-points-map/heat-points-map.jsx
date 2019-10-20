@@ -3,14 +3,13 @@ import MapGL, {Source, Layer, Popup} from 'react-map-gl';
 import {heatmapLayer} from './map-style';
 import {pointsLayer} from './map-style';
 
-import data from '../../data/points.json';
-import { PopupInfoContainer } from './heat-points-map-styles';
+import { PopupInfoContainer, HeatPointsMapContainer } from './heat-points-map-styles';
 import { CATEGORIES } from '../../utils/constants';
 
 import moment from 'moment';
 
 
-const HeatPointsMap = () => {
+const HeatPointsMap = ({className, data}) => {
   const {REACT_APP_MAPBOX_TOKEN} = process.env;
   const [viewport, setViewport] = useState({
     latitude: 0,
@@ -54,7 +53,7 @@ const HeatPointsMap = () => {
   };
 
   return (
-    <div style={{ height: '100%' }}>
+    <HeatPointsMapContainer {...{className}}>
       <MapGL
         {...viewport}
         width="100%"
@@ -72,7 +71,7 @@ const HeatPointsMap = () => {
         )}
         {_renderPopup()}
       </MapGL>
-    </div>
+    </HeatPointsMapContainer>
   );
 };
 

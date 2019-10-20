@@ -29,3 +29,7 @@ export const PopupInfoContainer = styled.div`
     justify-content: space-between;
   }
 `;
+
+export const HeatPointsMapContainer = styled.div`
+
+`;
